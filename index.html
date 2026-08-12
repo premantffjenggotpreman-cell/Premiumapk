@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>KINOSUKE • Application Update</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+:root{
+    --green:#30ff7a;
+    --green2:#12c95b;
+    --white:#ffffff;
+    --muted:#a7b0aa;
+    --glass:rgba(255,255,255,.075);
+    --border:rgba(255,255,255,.13);
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:22px 15px;
+
+    color:white;
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(48,255,122,.20),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 90% 85%,
+            rgba(0,150,255,.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            145deg,
+            #020403,
+            #07100b 50%,
+            #020403
+        );
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Inter,
+        Arial,
+        sans-serif;
+}
+
+/* BACKGROUND */
+
+.background{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:0;
+}
+
+.orb{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    opacity:.18;
+    animation:float 8s ease-in-out infinite;
+}
+
+.orb.one{
+    width:180px;
+    height:180px;
+    background:#20ff70;
+    top:-80px;
+    left:-70px;
+}
+
+.orb.two{
+    width:150px;
+    height:150px;
+    background:#168cff;
+    right:-60px;
+    bottom:-50px;
+    animation-delay:2s;
+}
+
+@keyframes float{
+    0%,100%{
+        transform:translate(0,0);
+    }
+    50%{
+        transform:translate(18px,-15px);
+    }
+}
+
+/* MAIN */
+
+.wrapper{
+    position:relative;
+    z-index:2;
+    width:100%;
+    max-width:440px;
+}
+
+/* GLASS CARD */
+
+.card{
+    position:relative;
+    overflow:hidden;
+
+    padding:30px 20px 22px;
+
+    border-radius:34px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.035)
+        );
+
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(30px) saturate(150%);
+    -webkit-backdrop-filter:blur(30px) saturate(150%);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55),
+        inset 0 1px 0 rgba(255,255,255,.12);
+
+    animation:cardIn .7s ease;
+}
+
+@keyframes cardIn{
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.97);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* TOP LIGHT */
+
+.card::before{
+    content:"";
+    position:absolute;
+    width:240px;
+    height:240px;
+    top:-160px;
+    left:50%;
+    transform:translateX(-50%);
+
+    background:var(--green);
+    filter:blur(100px);
+    opacity:.12;
+}
+
+/* APPLE STYLE LOGO */
+
+.logo-box{
+    width:82px;
+    height:82px;
+
+    margin:0 auto 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border-radius:26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.16),
+            rgba(255,255,255,.045)
+        );
+
+    border:1px solid rgba(255,255,255,.16);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.18);
+
+    animation:logoFloat 4s ease-in-out infinite;
+}
+
+@keyframes logoFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+.apple{
+    position:relative;
+    width:43px;
+    height:48px;
+    filter:
+        drop-shadow(0 0 10px rgba(255,255,255,.18));
+}
+
+/* Apple body */
+
+.apple-body{
+    position:absolute;
+    width:37px;
+    height:39px;
+
+    left:3px;
+    bottom:0;
+
+    background:#fff;
+
+    border-radius:
+        48% 52% 48% 48% /
+        55% 55% 45% 45%;
+
+    transform:rotate(-4deg);
+}
+
+/* Apple bite */
+
+.apple-body::after{
+    content:"";
+
+    position:absolute;
+
+    width:14px;
+    height:14px;
+
+    right:-5px;
+    top:10px;
+
+    background:#07100b;
+
+    border-radius:50%;
+}
+
+/* Apple leaf */
+
+.apple-leaf{
+    position:absolute;
+
+    width:17px;
+    height:10px;
+
+    top:0;
+    right:3px;
+
+    background:#fff;
+
+    border-radius:
+        100% 0 100% 0;
+
+    transform:rotate(-28deg);
+}
+
+/* TITLE */
+
+.title{
+    text-align:center;
+    font-size:25px;
+    font-weight:750;
+    letter-spacing:-.6px;
+}
+
+.title span{
+    color:var(--green);
+}
+
+.subtitle{
+    margin:10px auto 23px;
+
+    max-width:350px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+    line-height:1.65;
+}
+
+/* STATUS */
+
+.status{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:13px 15px;
+    margin-bottom:18px;
+
+    border-radius:17px;
+
+    background:rgba(48,255,122,.065);
+
+    border:1px solid rgba(48,255,122,.14);
+}
+
+.status-dot{
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:var(--green);
+
+    box-shadow:
+        0 0 0 5px rgba(48,255,122,.08),
+        0 0 15px var(--green);
+
+    animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{
+        opacity:1;
+    }
+    50%{
+        opacity:.4;
+    }
+}
+
+.status-text{
+    font-size:12px;
+    color:#cbd5ce;
+}
+
+.status-text b{
+    color:white;
+}
+
+/* SECTION */
+
+.section{
+    margin-top:18px;
+}
+
+.section-title{
+    margin:0 4px 10px;
+
+    color:#9ca79f;
+
+    font-size:10px;
+    font-weight:700;
+
+    text-transform:uppercase;
+    letter-spacing:1.4px;
+}
+
+/* WHATSAPP BUTTON */
+
+.group{
+    position:relative;
+
+    display:flex;
+    align-items:center;
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:10px;
+
+    color:white;
+    text-decoration:none;
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.085),
+            rgba(255,255,255,.035)
+        );
+
+    border:1px solid rgba(255,255,255,.105);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.07);
+
+    transition:
+        transform .2s ease,
+        border .2s ease,
+        background .2s ease;
+}
+
+.group:active{
+    transform:scale(.975);
+}
+
+.group:hover{
+    border-color:rgba(48,255,122,.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(48,255,122,.11),
+            rgba(255,255,255,.04)
+        );
+}
+
+.wa-icon{
+    width:45px;
+    height:45px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #39f77b,
+            #0da84c
+        );
+
+    box-shadow:
+        0 8px 20px rgba(20,220,90,.20);
+
+    font-size:21px;
+}
+
+.group-info{
+    flex:1;
+    margin-left:12px;
+}
+
+.group-info strong{
+    display:block;
+
+    font-size:13px;
+    font-weight:700;
+
+    margin-bottom:4px;
+}
+
+.group-info small{
+    color:#8e9991;
+    font-size:10px;
+}
+
+.arrow{
+    color:#42ff83;
+    font-size:25px;
+    font-weight:200;
+}
+
+/* FREE BADGE */
+
+.free{
+    margin-top:20px;
+
+    padding:16px;
+
+    text-align:center;
+
+    border-radius:19px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(48,255,122,.10),
+            rgba(48,255,122,.035)
+        );
+
+    border:1px solid rgba(48,255,122,.15);
+}
+
+.free-title{
+    color:var(--green);
+
+    font-size:12px;
+    font-weight:750;
+
+    margin-bottom:5px;
+}
+
+.free-text{
+    color:#929e96;
+    font-size:10px;
+}
+
+/* FOOTER */
+
+.footer{
+    margin-top:22px;
+    padding-top:18px;
+
+    border-top:
+        1px solid rgba(255,255,255,.08);
+
+    text-align:center;
+}
+
+.developer{
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.3px;
+}
+
+.developer span{
+    color:var(--green);
+}
+
+.cs{
+    margin-top:7px;
+
+    color:#7f8982;
+    font-size:10px;
+}
+
+.cs strong{
+    color:#dce5df;
+}
+
+/* SAFE AREA */
+
+@supports(padding:max(0px)){
+    body{
+        padding-bottom:max(
+            22px,
+            env(safe-area-inset-bottom)
+        );
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background">
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+</div>
+
+<main class="wrapper">
+
+    <section class="card">
+
+        <!-- LOGO IPHONE / APPLE STYLE -->
+        <div class="logo-box">
+            <div class="apple">
+                <div class="apple-leaf"></div>
+                <div class="apple-body"></div>
+            </div>
+        </div>
+
+        <h1 class="title">
+            Aplikasi <span>Update</span>
+        </h1>
+
+        <p class="subtitle">
+            Aplikasi sedang dalam proses pembaruan.
+            Untuk mendapatkan informasi terbaru,
+            silakan bergabung ke komunitas resmi kami.
+        </p>
+
+        <!-- STATUS -->
+        <div class="status">
+            <div class="status-dot"></div>
+
+            <div class="status-text">
+                Status:
+                <b>Maintenance / Update</b>
+            </div>
+        </div>
+
+        <!-- GROUP -->
+        <div class="section">
+
+            <div class="section-title">
+                Komunitas WhatsApp
+            </div>
+
+            <a
+                class="group"
+                href="https://chat.whatsapp.com/DGBS8wf00eB4JsrV72JdbK"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div class="wa-icon">☏</div>
+
+                <div class="group-info">
+                    <strong>WhatsApp Group 01</strong>
+                    <small>
+                        Informasi & update terbaru
+                    </small>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+            <a
+                class="group"
+                href="https://chat.whatsapp.com/EX4STNkaS6cBDwsyaKpAis"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <div class="wa-icon">☏</div>
+
+                <div class="group-info">
+                    <strong>WhatsApp Group 02</strong>
+                    <small>
+                        Komunitas & pengumuman
+                    </small>
+                </div>
+
+                <div class="arrow">›</div>
+            </a>
+
+        </div>
+
+        <!-- GRATIS -->
+        <div class="free">
+            <div class="free-title">
+                ✦ 100% GRATIS
+            </div>
+
+            <div class="free-text">
+                Aplikasi ini sepenuhnya gratis
+                untuk digunakan.
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <div class="developer">
+                Developer <span>• KINOSUKE</span>
+            </div>
+
+            <div class="cs">
+                Customer Service:
+                <strong>0851-4806-1112</strong>
+            </div>
+
+        </footer>
+
+    </section>
+
+</main>
+
+</body>
+</html>
